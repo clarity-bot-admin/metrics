@@ -66,7 +66,7 @@ public class MetricRegistry implements MetricSet {
      *
      * @return a new {@link ConcurrentMap}
      */
-    protected ConcurrentMap<String, Metric> buildMap() {
+    protected ConcurrentMap<String, String> buildMap() {
         return new ConcurrentHashMap<String, Metric>();
     }
 
@@ -94,15 +94,6 @@ public class MetricRegistry implements MetricSet {
         return metric;
     }
 
-    /**
-     * Given a metric set, registers them.
-     *
-     * @param metrics    a set of metrics
-     * @throws IllegalArgumentException if any of the names are already registered
-     */
-    public void registerAll(MetricSet metrics) throws IllegalArgumentException {
-        registerAll(null, metrics);
-    }
 
     /**
      * Return the {@link Counter} registered under this name; or create and register 
@@ -111,7 +102,7 @@ public class MetricRegistry implements MetricSet {
      * @param name the name of the metric
      * @return a new or pre-existing {@link Counter}
      */
-    public Counter counter(String name) {
+    public Counter counter(int name) {
         return getOrAdd(name, MetricBuilder.COUNTERS);
     }
 
